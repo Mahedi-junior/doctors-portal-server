@@ -82,6 +82,15 @@ async function run() {
       res.send(options);
     });
 
+    app.get("/appointmentSpecialty", async (req, res) => {
+      const query = {};
+      const result = await appointmentOptionCollection
+        .find(query)
+        .project({ name: 1 })
+        .toArray();
+      res.send(result);
+    });
+
     // if api version is change
     app.get("/v2/appointmentOptions", async (req, res) => {
       const date = req.query.date;
